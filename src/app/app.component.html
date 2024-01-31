@@ -1,0 +1,39 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <p>
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name">
+      </p>
+
+      <!-- FormArray with array of objects -->
+      <div formArrayName="skills">
+        <div *ngFor="let skill of skills.controls; let i=index;">
+          <div [formGroupName]="i">
+            skill Name: 
+            <input type="text" formControlName="skill">
+            <input type="text" formControlName="exp">
+            <button (click)="removeSkill(i)">Remove</button>
+          </div>
+        </div>
+        
+        <button (click)="addSkill()">Add Skill</button>
+      </div>
+  
+      <!-- FormArray with array of strings -->
+      <div formArrayName="currencies">
+        <div *ngFor="let currency of currencies.controls; let i=index">
+          Currency: <input type="text" [formControlName]="i">
+        </div>
+        <button (click)="addCurrency()">Add currency</button>
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  
+  <button (click)="changeIcon()">Change icon</button>
+  <button (click)="getPlayers()">Get Players</button>
+  <button (click)="goTo('users')">Go To users</button>
+  <button (click)="goTo('posts')">Go To posts</button>
+  <router-outlet></router-outlet>
+</div>
